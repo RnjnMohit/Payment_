@@ -1,7 +1,6 @@
 import './App.css'
 import Info from './components/InformationSection/Info'
 import Navbar from './components/Navbar_setup/Navbar'
-import Frame from './pages/login';
 
 function App() {
 
@@ -9,7 +8,6 @@ function App() {
     <>
       <Navbar />
       <Info />
-      <Frame/>
       {/* d */}
     </>
   )
