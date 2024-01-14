@@ -6,10 +6,10 @@ export default function Navbar(){
         <div className="flex justify-between align-middle h-28 border-b border-blue-800">
             <p className=" m-10">LOGO</p>
             <div>
-                <NavbarButton name="Personal" />
+                {/* <NavbarButton name="Personal" />
                 <NavbarButton name="Buisness" />
                 <NavbarButton name="Company" />
-                <NavbarButton name="Help" />
+                <NavbarButton name="Help" /> */}
 
                 
                 <NavbarButton name="Login"  custom="ml-28"/>
