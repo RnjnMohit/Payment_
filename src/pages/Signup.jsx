@@ -13,6 +13,7 @@ const Signup = ({ setIsLoggedIn }) => {
         firstName: "",
         lastName: "",
         email: "",
+        phone:"",
         password: "",
         confirmPassword: ""
     })
@@ -47,7 +48,7 @@ const Signup = ({ setIsLoggedIn }) => {
                 lastName:formData.lastName,
                 email:formData.email,
                 password:formData.password,
-                phone:123456789
+                phone:formData.phone,
             })
         });
         const json = await response.json();
@@ -95,6 +96,18 @@ const Signup = ({ setIsLoggedIn }) => {
                     value={formData.email}
                     placeholder="Enter email"
                     onChange={changeHandler} />
+            </label>
+            <label>
+                <p>
+                    Phone Number<sup>*</sup>
+                </p>
+                <input 
+                required
+                type="number"
+                name="phone"
+                value={formData.phone}
+                placeholder="Enter phone no."
+                onChange={changeHandler} />
             </label>
             <label>
                 <p>
