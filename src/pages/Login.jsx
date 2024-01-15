@@ -19,7 +19,6 @@ const Login = ({setIsLoggedIn}) => {
 
     async function submitHandler(event){
         event.preventDefault();
-        setIsLoggedIn(true);
         const response = await fetch("http://localhost:3000/user/login", {
             method: "POST",
             headers: {
@@ -32,6 +31,16 @@ const Login = ({setIsLoggedIn}) => {
         });
         const json = await response.json();
         console.log(json);
+
+        if(response.status === 404){
+            toast.error("Account do not exist")
+            return;
+        }
+        if(response.status === 401){
+            toast.error("Password do not match")
+            return;
+        }
+        setIsLoggedIn(true);
         toast.success('Logged in');
         /*v*/
     }

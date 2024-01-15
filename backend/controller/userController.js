@@ -36,7 +36,8 @@ module.exports.loginUser = async function loginUser(req,res){
         if(data.email){
             let user = await userModel.findOne({email: data.email});
             if(user){
-                if(bcrypt.compare(data.password, user.password)){
+                const t = await bcrypt.compare(data.password, user.password);
+                if(t){
                     let uid = user['_id'];//uid
                     let token = jwt.sign({ payload: uid }, JWT_KEY);
                     res.cookie('login', token, { httpOnly: true });
