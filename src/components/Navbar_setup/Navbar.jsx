@@ -13,7 +13,9 @@ export default function Navbar(){
                 <NavbarButton name="Help" />
 
 
-                <NavbarButton name="Login"   custom="ml-28"/>
+                <Link to="/login">
+                    <button>Log in</button>
+                </Link>
                 <Link to="/signup">
                     <button>Sign Up</button>
                 </Link>
