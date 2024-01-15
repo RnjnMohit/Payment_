@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 const Login = ({setIsLoggedIn}) => {
 
     const [formData, setFormData] = useState({
-        phoneNumber:"",
+        email:"",
         password:"",
     })
 
@@ -19,10 +19,6 @@ const Login = ({setIsLoggedIn}) => {
 
     function submitHandler(event){
         event.preventDefault();
-        if(formData.phoneNumber.length !== 10){
-            toast.error('incorrect phone number')
-            return;
-        }
         setIsLoggedIn(true);
         toast.success('Logged in');
         /*v*/
@@ -34,13 +30,13 @@ const Login = ({setIsLoggedIn}) => {
         <form onSubmit={submitHandler}>
             <label>
                 <p>
-                    Phone Number<sup>*</sup>
+                    Email<sup>*</sup>
                 </p>
                 <input 
                 required 
-                type="number"
-                placeholder="Enter you phone no."
-                name="phoneNumber"
+                type="email"
+                placeholder="Enter you email id"
+                name="email"
                 value={formData.phoneNumber}
                 onChange={changeHandler}
                   />
