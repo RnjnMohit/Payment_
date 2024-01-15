@@ -17,9 +17,21 @@ const Login = ({setIsLoggedIn}) => {
         ))
     }
 
-    function submitHandler(event){
+    async function submitHandler(event){
         event.preventDefault();
         setIsLoggedIn(true);
+        const response = await fetch("http://localhost:3000/user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email:formData.email,
+                password:formData.password
+            })
+        });
+        const json = await response.json();
+        console.log(json);
         toast.success('Logged in');
         /*v*/
     }
