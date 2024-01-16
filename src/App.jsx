@@ -1,9 +1,10 @@
-
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import { useState } from 'react'
+import Navbar from './components/Navbar_setup/Navbar';
+
 
 function App() {
 
@@ -11,6 +12,9 @@ function App() {
 
   return (
     <>
+
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}  />
+
       <Routes>
         <Route path='/' element={<Home />} /> 
         <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>} /> 
