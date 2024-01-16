@@ -11,9 +11,12 @@ export default function Info(){
                     <button className="hover:bg-blue-800 hover:text-stone-100 rounded-xl p-4 px-6 my-0 ml-0 text-blue-800 bg-blue-100 transition duration-150 flex justify-between align-middle border border-blue-800 mr-5">See how it works</button>
                 </div>
             </div>
-            <div>
-    hello
+            
+            <div className=" h-full w-3/5 bg-stone-400 align-middle justify-center flex">
+                    hi
+
             </div>
+            
         </div>
     </>
 }
