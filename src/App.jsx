@@ -1,25 +1,22 @@
-import { useState } from 'react';
-import './App.css'
-import Signup from './pages/signup';
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import { set } from 'rsuite/esm/utils/dateUtils';
-import Login from './pages/Login';
 
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import { useState } from 'react'
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn ] = useState(false);
 
   return (
     <>
-
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
-        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-      </Routes>
+        <Route path='/' element={<Home />} /> 
+        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>} /> 
+        <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn}/>} /> 
 
+      </Routes>
     </>
   )
 }

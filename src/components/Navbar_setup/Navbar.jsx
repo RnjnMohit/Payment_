@@ -14,10 +14,10 @@ export default function Navbar(){
 
 
                 <Link to="/login">
-                    <button>Log in</button>
+                    <NavbarButton name="Login"  custom="ml-28"/>
                 </Link>
                 <Link to="/signup">
-                    <button>Sign Up</button>
+                    <NavbarButton name="Sign Up →" custom="mr-20 bg-blue-800 text-stone-100 rounded-xl p-4 px-6 my-0 ml-0 hover:text-blue-800 hover:bg-blue-100 transition duration-150" />
                 </Link>
             </div>
         </div>
