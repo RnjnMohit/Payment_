@@ -58,8 +58,6 @@
 .form input 
 {
     width:100%;
-    outline: none;
-    border: none;
 }
 
 .btns{
@@ -104,4 +102,10 @@
 
 .hide{
     display: none;
+}
+
+.noborder{
+    
+    outline: none;
+    border: none;
 }
