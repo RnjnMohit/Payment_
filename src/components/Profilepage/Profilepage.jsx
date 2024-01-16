@@ -2,6 +2,7 @@ import React from 'react'
 import './Profilepage.css'
 import profile from '../../assets/profile.jpg'
 import User from './User'
+// import User from './User'
 const Profilepage = () => {
     return (
         <>
