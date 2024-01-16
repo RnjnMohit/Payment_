@@ -3,7 +3,11 @@ import './Profilepage.css'
 import profile from '../../assets/profile.jpg'
 import User from './User'
 // import User from './User'
-const Profilepage = () => {
+const Profilepage = (props) => {
+
+    const isLoggedIn = props.isLoggedIn;
+    const setIsLoggedIn = props.setIsLoggedIn;
+
     return (
         <>
             <section className='topbg'>

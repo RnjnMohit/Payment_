@@ -10,9 +10,11 @@ const Navbar = (props) => {
 
     return <>
         <div className="flex justify-between align-middle h-28 border-b border-blue-800">
-            <p className=" m-10">LOGO</p>
+            <p className="ml-10 mt-3 h-20 w-28"><img src="src\assets\WhatsApp Image 2024-01-15 at 22.43.31_2193eddb.jpg"></img></p>
             <div>
-                <NavbarButton name="Personal" />
+                <Link to="/profile">
+                    <NavbarButton name="Profile" />
+                </Link>
                 <NavbarButton name="Buisness" />
                 <NavbarButton name="Company" />
                 <NavbarButton name="Help" />
