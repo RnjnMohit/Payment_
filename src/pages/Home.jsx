@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar_setup/Navbar";
 function Home() {
     return (
         <>
-            <Navbar/>
+            {/* <Navbar/> */}
             <Info/>
         </>
     )

@@ -1,8 +1,11 @@
 import { useState } from "react"
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = ({setIsLoggedIn}) => {
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email:"",
@@ -42,6 +45,7 @@ const Login = ({setIsLoggedIn}) => {
         }
         setIsLoggedIn(true);
         toast.success('Logged in');
+        navigate("/");
         /*v*/
     }
 
@@ -78,9 +82,6 @@ const Login = ({setIsLoggedIn}) => {
                 Login
             </button>
         </form>
-
-
-
     )
 }
 
