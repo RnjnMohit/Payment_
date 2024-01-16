@@ -4,8 +4,6 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import { useState } from 'react'
 import Navbar from './components/Navbar_setup/Navbar';
-import Navbar from './components/Navbar_setup/Navbar'
-import Navbar from './components/Navbar_setup/Navbar';
 import Profilepage from './components/Profilepage/Profilepage';
 
 function App() {
