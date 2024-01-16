@@ -60,6 +60,6 @@ body{
 }
 .profileImg img{
     height: 12em;
-    box-shadow: 0 0 300px 1px #5732c6;
+    box-shadow: 0 0 10000px 1px #5732c6;
     border-radius: 50%;
 }
