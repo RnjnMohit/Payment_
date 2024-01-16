@@ -12,9 +12,21 @@ export default function Info(){
                 </div>
             </div>
             
-            <div className=" h-full w-3/5 bg-stone-400 align-middle justify-center flex">
-                    hi
-
+            <div className=" h-auto w-3/5 mx-40 align-middle justify-center flex-row shadow-2xl rounded-2xl bg-slate-100 ">
+                <div className="bg-blue-200 h-1/5 mt-4 mx-10 w-80 p-5 rounded-2xl align-middle justify-center flex text-2xl">
+                    Amount
+                </div>
+                <div className="mx-10 text-xl mt-5">
+                    <p className="my-3">Show Calculation</p>
+                    <p className="my-3">--</p>
+                    <p className="my-3"> Your Currency </p>
+                    <p className="my-3"> -- </p>
+                    <p className="my-3"> Converted Currency </p>
+                    <p className="my-3"> -- </p>
+                </div>
+                <div className="bg-blue-200 h-1/5 mt-4 mx-10 w-80 p-5 rounded-2xl align-middle justify-center flex text-2xl">
+                    Wallet
+                </div>
             </div>
             
         </div>
