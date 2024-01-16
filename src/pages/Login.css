@@ -1,0 +1,129 @@
+/* Login.css */
+
+/* Form Container */
+form {
+    width: 600px;
+    margin: auto;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    height: 600px;
+    border-style: dashed;
+    border-radius: 5%;
+    flex-direction: column;
+    
+  }
+  
+  /* Label Styles */
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Input Styles */
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  /* Button Styles */
+  button {
+    background-color: #4a90e2; /* Adjust the color as needed */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #007bb5; /* Adjust the hover color as needed */
+  }
+  
+  /* Supplementary Styles */
+  sup {
+    color: red;
+  }
+  
+  /* Responsive Styles (Optional) */
+  @media screen and (max-width: 600px) {
+    form {
+      max-width: 100%;
+    }
+  }
+  
+.heading{
+    font-size:xx-large;
+    font-weight: 600;
+    color: rgb(25, 25, 129);
+    text-align: center;
+
+}
+
+.acc{
+    text-align: center;
+    color: rgb(60, 60, 150);
+    font-size: medium;
+    font-weight: 400;
+    padding-bottom: 110px;
+    
+}
+
+.acc a{
+    margin-right: 10px;
+}.hi{
+    color: blue;
+}
+
+.btn{
+    border: none;
+    color: #fff;
+    text-align: center;
+    width: 500px;
+    padding: 15px 15px;
+    background-color: #5732C6;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    overflow: hidden;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    z-index: 3;
+    transition: 0.5s;
+    margin: 25px;
+}
+
+.log-reg .login-with {
+    margin: 15px 0 20px;
+}
+
+.lassi{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px;
+}
+
+.align-items-center {
+    align-items: center!important;
+}
+
+.forget-pw{
+    text-align: center;
+    margin: 20px;
+}
+.complete{
+    margin: 100px;
+}
