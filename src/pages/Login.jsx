@@ -89,7 +89,7 @@ const Login = ({setIsLoggedIn}) => {
                 Login
             </button>
             <div class="form-bottom">
-            <div class="continue"><p>----------------------------------Or continue with---------------------------------</p></div>
+            <div class="continue"><p>------------------------Or continue with-----------------------</p></div>
             <div class="login-with d-flex align-items-center lassi">
                 <a href="javascript:void(0)"><img src="src\assets\img\image-2.png" alt="image"/></a>
                 <a href="javascript:void(0)"><img src="src\assets\img\image-3.png" alt="image"/></a>
