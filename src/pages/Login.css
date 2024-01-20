@@ -42,10 +42,11 @@ form {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    padding: 2px;
   }
   
-  button:hover {
-    background-color: #007bb5; /* Adjust the hover color as needed */
+  .btn:hover {
+    background-color: rgb(219,234,254); 
   }
   
   /* Supplementary Styles */
@@ -89,7 +90,7 @@ form {
     text-align: center;
     width: 500px;
     padding: 15px 15px;
-    background-color: #5732C6;
+    background-color: rgb(30,64,175);
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     border-radius: 26px;
     font-weight: bold;

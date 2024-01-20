@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import { useState } from 'react'
 import Navbar from './components/Navbar_setup/Navbar';
 import Profilepage from './components/Profilepage/Profilepage';
+import Wallet from './pages/Wallet'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/profile" element={<Navigate to='/login' replace/>}/>
           )
         }
+        <Route path='/wallet' element={<Wallet />} />
       </Routes>
     </>
   )
