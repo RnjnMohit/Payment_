@@ -144,7 +144,7 @@ const Signup = ({ setIsLoggedIn }) => {
                     showConfirmPassword ? (<AiOutlineEye />) : (<AiOutlineEyeInvisible />)
                 }
             </span>
-            <button>
+            <button className="ml-28 bg-blue-800 text-stone-100 rounded-xl p-4 px-6 my-0 ml-0 hover:text-blue-800 hover:bg-blue-100 transition duration-150">
                 Create Account
             </button>
         </form>

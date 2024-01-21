@@ -5,8 +5,11 @@ import Login from './pages/Login'
 import { useState } from 'react'
 import Navbar from './components/Navbar_setup/Navbar';
 import Profilepage from './components/Profilepage/Profilepage';
+
 import { CookiesProvider, useCookies } from "react-cookie";
 import CookieState from './context/cookie/cookieState'
+
+import Wallet from './pages/Wallet'
 
 function App() {
   const [cookies, setCookie,removeCookie] = useCookies(["login"]);
@@ -32,11 +35,19 @@ function App() {
               isLoggedIn ? (
                 <Route path='/profile' element={<Profilepage setIsLoggedIn={setIsLoggedIn} />} />
 
+
               ) : (
                 <Route path="/profile" element={<Navigate to='/login' replace />} />
               )
             }
+            {
+          isLoggedIn ? (
+            <Route path='/wallet' element={<Wallet/>} />
 
+          ) : (
+            <Route path="/wallet" element={<Navigate to='/login' replace/>}/>
+          )
+        }
           </Routes>
         </CookieState>
       </CookiesProvider>
