@@ -26,3 +26,20 @@ module.exports.updateAccount = async function updateAccount(req, res) {
         res.json(error)
     }
 }
+
+
+module.exports.getAccount = async function getAccount(req,res){
+    try {
+        let uid = jwt.verify((req.headers.authorization && req.headers.authorization.split(' ')[1]),JWT_KEY).payload;
+        console.log(uid);
+        let account = await accountModel.findOne({user:uid});
+        if(account){
+            res.json(account);
+        }
+        else{
+            res.status(404).json({msg:"user not found"});
+        }
+    } catch (error) {
+        res.json(error);
+    }
+}

@@ -34,6 +34,7 @@ const Navbar = (props) => {
                             <button className="ml-28 bg-blue-800 text-stone-100 rounded-xl p-4 px-6 my-0 ml-0 hover:text-blue-800 hover:bg-blue-100 transition duration-150"
                              onClick={() => {
                                 setIsLoggedIn(false);
+                                props.settingCookie(null);
                                 toast.success("Logged Out");
                             }}>Log Out</button>
                         </Link>

@@ -5,30 +5,41 @@ import Login from './pages/Login'
 import { useState } from 'react'
 import Navbar from './components/Navbar_setup/Navbar';
 import Profilepage from './components/Profilepage/Profilepage';
+import { CookiesProvider, useCookies } from "react-cookie";
+import CookieState from './context/cookie/cookieState'
 
 function App() {
-
-  const [isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [cookies, setCookie,removeCookie] = useCookies(["login"]);
+  
+  
+  function settingCookie(e){
+    e?setCookie("login",e,{path: "/"}):removeCookie("login");
+  }
+  const [isLoggedIn, setIsLoggedIn] = useState(cookies.login!=undefined?true:false);
 
   return (
     <>
 
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}  />
+      <CookiesProvider>
+        <CookieState>
+          <Navbar isLoggedIn={isLoggedIn} settingCookie={settingCookie} setIsLoggedIn={setIsLoggedIn} />
 
-      <Routes>
-        <Route path='/' element={<Home />} /> 
-        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>} /> 
-        <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn}/>} />
-        {
-          isLoggedIn ? (
-            <Route path='/profile' element={<Profilepage setIsLoggedIn={setIsLoggedIn}/>} /> 
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login'  element={<Login settingCookie={settingCookie} setIsLoggedIn={setIsLoggedIn} />} />
+            <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
+            {
+              isLoggedIn ? (
+                <Route path='/profile' element={<Profilepage setIsLoggedIn={setIsLoggedIn} />} />
 
-          ) : (
-            <Route path="/profile" element={<Navigate to='/login' replace/>}/>
-          )
-        } 
-        
-      </Routes>
+              ) : (
+                <Route path="/profile" element={<Navigate to='/login' replace />} />
+              )
+            }
+
+          </Routes>
+        </CookieState>
+      </CookiesProvider>
     </>
   )
 }

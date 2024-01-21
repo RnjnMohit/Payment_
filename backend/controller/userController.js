@@ -2,6 +2,7 @@ const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const JWT_KEY = process.env.JWT_KEY;
 const bcrypt = require('bcrypt');
+
 module.exports.createUser = async function createUser(req, res) {
     try {
         const data = req.body;
@@ -12,7 +13,7 @@ module.exports.createUser = async function createUser(req, res) {
         if (userData) {
             let uid = userData['_id'];
             let token = jwt.sign({ payload: uid }, JWT_KEY);
-            res.cookie('login', token, { httpOnly: true });
+            res.cookie('login', token,);
             return res.json({
                 message: "signUp successfull",
                 data: userData
@@ -40,10 +41,11 @@ module.exports.loginUser = async function loginUser(req, res) {
                 if (t) {
                     let uid = user['_id'];//uid
                     let token = jwt.sign({ payload: uid }, JWT_KEY);
-                    res.cookie('login', token, { httpOnly: true });
+                    res.cookie('login', token);
                     return res.json({
                         message: "user loggedin successfully",
-                        data: data
+                        data: data,
+                        cookie:token
                     })
                 }
                 else {
@@ -70,23 +72,43 @@ module.exports.loginUser = async function loginUser(req, res) {
 
 
 
-module.exports.getLogin = async function (req, res) {
+module.exports.getLogin = async function getLogin(req, res) {
     try {
         if (req.cookies.login) {
             let token = req.cookies.login;
+            console.log(token);
             let payload = jwt.verify(token, process.env.JWT_KEY);
             if (payload) {
-                res.json({ cookie: payload.payload });
+                res.json({ cookie: token, status: true });
             }
             else {
-                res.status(404).json({ msg: 'user not veryfied' });
+                res.status(404).json({ msg: 'user not veryfied', status: false });
             }
         }
         else {
-            res.status(404).json({ msg: 'please login' });
+            res.status(404).json({ msg: 'please login', status: false });
         }
     }
     catch (err) {
         return res.status(404).json(err);
+    }
+}
+
+module.exports.userDetails = async function userDetails(req, res) {
+    try {
+        let token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+        let payload = jwt.verify(token, process.env.JWT_KEY);
+        const uid = payload.payload;
+        console.log(uid);
+        const user = await userModel.findById(uid);
+        if (user) {
+            res.json(user)
+        }
+        else {
+            res.status(404).json({ msg: "user not found" })
+        }
+
+    } catch (error) {
+        res.json(error);
     }
 }

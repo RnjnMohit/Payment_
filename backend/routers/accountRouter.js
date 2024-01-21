@@ -1,8 +1,9 @@
 const express = require('express');
-const { updateAccount } = require('../controller/accountController');
+const { updateAccount, getAccount } = require('../controller/accountController');
 const accountRouter = express.Router();
 
 accountRouter.route('/updateAccount')
-    .post(updateAccount);
+    .post(updateAccount)
+    .get(getAccount)
 
 module.exports = accountRouter;
