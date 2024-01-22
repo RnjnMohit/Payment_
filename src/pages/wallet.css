@@ -1,0 +1,93 @@
+.h1{
+    font-size: 55px;
+    margin-left: 110px;
+    margin-top: 15px;
+}
+#money{
+    font-size: 55px;
+    padding-top: 55px;
+    color: white;
+    text-align: left;
+    margin-left: 65px;
+}
+.paisa{
+    width: 40%;
+    background-color: rgb(21, 10, 81);
+    margin-left: 70px;
+    margin-top: 50px;
+    border-radius: 30px;
+    height: 300px;
+    text-align: center;
+}
+
+.total-trans{
+    width: 22%;
+    background-color: rgb(21, 10, 81);
+    margin-left: 50px;
+    border-radius: 30px;
+    height: 300px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.box{
+    display: flex;
+}
+
+#name{
+    font-size: 20px;
+    float: right;
+    margin-right: 16%;
+    margin-top: 100px;
+    color: white;
+}
+.total-trans p{
+    color: white;
+}
+
+#trans{
+    text-align: center;
+    margin-top: 35px;
+}
+
+#send{
+    float: left;
+    margin-left: 35px;
+    margin-top: 50px;
+    color: rgb(197, 78, 78);
+}
+
+#recieved{
+    float: right;
+    margin-right: 35px;
+    margin-top: 50px;
+    color: rgb(48, 218, 59);
+}
+
+#money-ref{
+    font-size: 15px;
+    color: white;
+    margin-top: 25px;
+    text-align: left;
+    margin-left: 45px;
+    height: 0.1rem;
+    float: inline-start;
+}
+.wallet{
+    display: flex;
+}
+
+.wallet-icon{
+    font-size: 4em;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.big-box{
+    background-color: white;
+    height: 200vh;
+}
+.price-icon{
+    font-size: 4rem;
+    margin-left: 135px;
+    margin-top: 25px;
+}
