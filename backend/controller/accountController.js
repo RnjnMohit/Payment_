@@ -41,5 +41,5 @@ module.exports.getAccount = async function getAccount(req,res){
         }
     } catch (error) {
         res.json(error);
-    }
+    }   
 }

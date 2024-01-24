@@ -24,12 +24,13 @@ const User = () => {
                         "Authorization": `Bearer ${document.cookie.split('=')[1]}`
                     },
                 });
-
+                
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
 
                 const d = await response.json();
+
                 const response2 = await fetch("http://localhost:3000/account/updateAccount", {
                     method: "GET",
                     headers: {
