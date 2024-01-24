@@ -99,7 +99,6 @@ module.exports.userDetails = async function userDetails(req, res) {
         let token = req.headers.authorization && req.headers.authorization.split(' ')[1];
         let payload = jwt.verify(token, process.env.JWT_KEY);
         const uid = payload.payload;
-        console.log(uid);
         const user = await userModel.findById(uid);
         if (user) {
             res.json(user)

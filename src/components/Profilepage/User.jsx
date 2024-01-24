@@ -3,13 +3,18 @@ import './user.css'
 import cookieContext from '../../context/cookie/cookieContext';
 const User = () => {
     const context = useContext(cookieContext);
-    const {cookie} = context;
     const [disable, setDisable] = useState(true);
-    const [data, setData] = useState({});
+    const [data, setData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        upi:'',
+        acNumber:''
+      });
     const [originalData, setOriginalData] = useState({});
     
     useEffect(() => {
-        console.log(document.cookie.split('=')[1]);
         const fetchData = async () => {
             try {
                 const response = await fetch("http://localhost:3000/user/userDetails", {
@@ -25,7 +30,21 @@ const User = () => {
                 }
 
                 const d = await response.json();
-                setData(d);
+                const response2 = await fetch("http://localhost:3000/account/updateAccount", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${document.cookie.split('=')[1]}`
+                    },
+                });
+
+                if (!response2.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+
+                const d2 = await response2.json();
+                console.log(d2.upi);
+                setData({firstName:d.firstName,lastName:d.lastName,email:d.email,phone:d.phone,upi:d2.upi,acNumber:d2.acNumber});
                 setOriginalData(d)
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -34,7 +53,6 @@ const User = () => {
 
         fetchData();
     }, []);
-    console.log(data);
     const onEdit = (e) => {
         e.preventDefault();
         setDisable(!disable);
@@ -60,7 +78,7 @@ const User = () => {
     return (
         <>
             <form className='form'>
-                <input disabled={disable} className="inp1 noborder" type="text" name="name" value={data.firstName + data.lastName } onChange={onchange} />
+                <input disabled className="inp1 noborder" type="text" name="name" value={(data.firstName || '') + ' ' + (data.lastName || '')} onChange={onchange} />
 
                 <label >
                     <p>Email:</p>
@@ -69,6 +87,14 @@ const User = () => {
                 <label >
                     <p>Phone:</p>
                     <input disabled={disable} className="inp3 noborder" type="number" name="phone" value={data.phone} onChange={onchange} />
+                </label>
+                <label >
+                    <p>UPI:</p>
+                    <input disabled={disable} className="inp3 noborder" type="text" name="upi" value={data.upi} onChange={onchange} />
+                </label>
+                <label >
+                    <p>Account:</p>
+                    <input disabled={disable} className="inp3 noborder" type="number" name="acNumber" value={data.acNumber} onChange={onchange} />
                 </label>
                 <div className="btns">
 

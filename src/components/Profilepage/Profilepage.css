@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    height: 1000px;
+    height: 1200px;
 }
 .topbg{
     position: absolute ;
@@ -34,7 +34,8 @@ body{
     box-shadow: 0 0 300px 0.1px #5732c6;
     border-radius: 30px;
     /* bottom: 100px; */
-    
+    /* height: 600px; */
+    background-image: linear-gradient(rgb(164, 251, 251),rgb(122, 122, 247) );
 }
 
 .photobar{
