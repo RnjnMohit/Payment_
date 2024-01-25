@@ -10,6 +10,12 @@
     text-align: left;
     margin-left: 65px;
 }
+#upi{
+    color: white;
+    margin-right: -280px;
+    margin-top: 10%;
+    font-size: 20px;
+}
 .paisa{
     width: 40%;
     background-color: rgb(21, 10, 81);
@@ -37,8 +43,8 @@
 #name{
     font-size: 20px;
     float: right;
-    margin-right: 16%;
-    margin-top: 100px;
+    margin-right: 12%;
+    margin-top: 20px;
     color: white;
 }
 .total-trans p{
@@ -57,11 +63,11 @@
     color: rgb(197, 78, 78);
 }
 
-#recieved{
-    float: right;
-    margin-right: 35px;
-    margin-top: 50px;
+#received{
     color: rgb(48, 218, 59);
+    margin-top: 365%;
+    margin-left: -155%;
+
 }
 
 #money-ref{
@@ -90,4 +96,13 @@
     font-size: 4rem;
     margin-left: 135px;
     margin-top: 25px;
+}
+#money-add{
+    float: left;
+    color: white;
+    margin-top: 2%;
+    margin-left: 10%;
+    background-color: rgb(45, 29, 134);
+    width: 22%;
+    border-radius: 25px;
 }
