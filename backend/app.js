@@ -14,5 +14,7 @@ app.use(cookieParser());
 
 const userRouter = require('./routers/userRouter');
 const accountRouter = require('./routers/accountRouter');
+const transactionRouter = require('./routers/transactionRouter');
 app.use('/user',userRouter)
 app.use('/account',accountRouter)
+app.use('/transaction',transactionRouter)

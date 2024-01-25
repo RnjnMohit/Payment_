@@ -31,7 +31,6 @@ module.exports.updateAccount = async function updateAccount(req, res) {
 module.exports.getAccount = async function getAccount(req,res){
     try {
         let uid = jwt.verify((req.headers.authorization && req.headers.authorization.split(' ')[1]),JWT_KEY).payload;
-        console.log(uid);
         let account = await accountModel.findOne({user:uid});
         if(account){
             res.json(account);
