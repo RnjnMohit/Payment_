@@ -3,7 +3,6 @@ import './wallet.css';
 import { FaWallet } from 'react-icons/fa';
 import { SiBitcoinsv } from 'react-icons/si';
 import toast from "react-hot-toast";
-import Login from './Login';
 
 const Wallet = (props) => {
   const [balance, setBalance] = useState(0);
@@ -101,21 +100,23 @@ const Wallet = (props) => {
           <p id="money">${balance}<br /></p>
           <p id='upi'>UPI: {upi}</p>
           <p id="name">{firstName} {lastName}</p>
-          <button id="money-add">Pay Now</button>
-          <input
-            type='text'
-            placeholder='Search by UPI or Account Number'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button onClick={fetchSearchResults}>Search</button>
-          <ul>
-            {results.map((result) => (
-              <li key={result._id}>
-                UPI: {result.upi}, Account Number: {result.acNumber}
-              </li>
-            ))}
-          </ul>
+          <div>
+            <button id="money-add">Pay Now</button>
+            <input id='search'
+              type='text'
+              placeholder='UPI or Account Number'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button id='acc-search' onClick={fetchSearchResults}>🔍</button>
+            <ul>
+              {results.map((result) => (
+                <li key={result._id}>
+                  UPI: {result.upi}, Account Number: {result.acNumber}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
         <div className="total-trans">
           <p id="trans">Total Transaction:<br />{transactions}<br /><SiBitcoinsv className="price-icon" /></p>

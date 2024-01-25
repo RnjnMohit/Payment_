@@ -106,3 +106,25 @@
     width: 22%;
     border-radius: 25px;
 }
+#search{
+    width: 45%;
+    float: right;
+    margin-top: -270px;
+    margin-right: -35px;
+    border-radius: 15px;
+    background-color: rgb(234, 234, 238);
+    height: 30px;
+    text-align: center;
+    color: blue;
+    border-color: rgb(108, 174, 177);
+}
+
+#acc-search{
+    /* width: 45%; */
+    float: right;
+    margin-top: -270px;
+    margin-right: -75px;
+    border-radius: 15px;
+    height: 2px;
+    font-size: 20px;
+}
