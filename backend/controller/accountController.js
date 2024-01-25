@@ -1,4 +1,5 @@
 const accountModel = require('../models/accountModel');
+// const searchModel = require('../models/searchModel');
 const jwt = require('jsonwebtoken');
 const JWT_KEY = process.env.JWT_KEY;
 
@@ -41,4 +42,26 @@ module.exports.getAccount = async function getAccount(req,res){
     } catch (error) {
         res.json(error);
     }   
+}
+
+module.exports.searchAccount = async function searchAccount(req,res){
+    try{
+        const { searchTerm } = req.query;
+
+        if(!searchTerm){
+            return res.status(400).json({ error: 'Search term is required' });
+        }
+
+        const searchResults = await accountModel.find({
+            $or: [
+                {upi: {$regex:searchTerm, $options: 'i'}}, 
+                {acNumber: {$regex: searchTerm, $options: 'i'}},
+            ],
+        });
+
+        res.json({ msg: 'Search successful', searchResults });
+    }
+    catch (error){
+        res.status(500).json({ error: 'Internal Server Error', message: error.message });
+    }
 }

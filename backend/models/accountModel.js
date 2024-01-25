@@ -29,7 +29,7 @@ const accountSchema = mongoose.Schema({
         required:true,
     },
     acNumber:{
-        type:Number,
+        type:String,
         required:true
     }
 });

@@ -2,13 +2,43 @@ import React, { useState, useEffect } from 'react';
 import './wallet.css';
 import { FaWallet } from 'react-icons/fa';
 import { SiBitcoinsv } from 'react-icons/si';
+import toast from "react-hot-toast";
+import Login from './Login';
 
-const Wallet = () => {
+const Wallet = (props) => {
   const [balance, setBalance] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [upi,setUpi] = useState('');
-  const [transitions, setTransactions] = useState('');
+  const [upi, setUpi] = useState('');
+  const [transactions, setTransactions] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+
+  const fetchSearchResults = async () => {
+    try {
+      const searchResponse = await fetch(`http://localhost:3000/search/searchAccount?searchTerm=${searchTerm}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!searchResponse.ok) {
+        throw new Error('Failed to fetch search results');
+      }
+
+      const searchData = await searchResponse.json();
+      if(searchData.searchResults.length===0){
+        console.log('Account Not Found');
+        toast.error('Account Not Found');
+      }
+      toast.success('Account Found');
+      console.log(searchData);
+      setResults(searchData.searchResults);
+    } catch (error) {
+      console.error('Error fetching search results:', error.message);
+    }
+  };
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -36,16 +66,19 @@ const Wallet = () => {
           throw new Error('Failed to fetch data');
         }
 
-        const accountData = await accountResponse.json();
-        const userData = await userDetailsResponse.json();
+        const [accountData, userData] = await Promise.all([
+          accountResponse.json(),
+          userDetailsResponse.json(),
+        ]);
+
         console.log(accountData);
-        console.log(userData);  
+        console.log(userData);
         setFirstName(userData.firstName);
         setLastName(userData.lastName);
-        setUpi(accountData.upi); 
+        setUpi(accountData.upi);
         setBalance(accountData.balance);
         setTransactions(accountData.transactions);
-        
+
         // Additional data processing if needed from userDetailsResponse
 
       } catch (error) {
@@ -54,7 +87,7 @@ const Wallet = () => {
     };
 
     fetchBalance();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div className="big-box">
@@ -69,9 +102,23 @@ const Wallet = () => {
           <p id='upi'>UPI: {upi}</p>
           <p id="name">{firstName} {lastName}</p>
           <button id="money-add">Pay Now</button>
+          <input
+            type='text'
+            placeholder='Search by UPI or Account Number'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={fetchSearchResults}>Search</button>
+          <ul>
+            {results.map((result) => (
+              <li key={result._id}>
+                UPI: {result.upi}, Account Number: {result.acNumber}
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="total-trans">
-          <p id="trans">Total Transaction:<br />{transitions}<br /><SiBitcoinsv className="price-icon" /></p>
+          <p id="trans">Total Transaction:<br />{transactions}<br /><SiBitcoinsv className="price-icon" /></p>
           <p id="send">10🔴<br />Send</p>
         </div>
         <div>
