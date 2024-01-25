@@ -8,6 +8,7 @@ const Wallet = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [upi,setUpi] = useState('');
+  const [transitions, setTransactions] = useState('');
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -43,6 +44,7 @@ const Wallet = () => {
         setLastName(userData.lastName);
         setUpi(accountData.upi); 
         setBalance(accountData.balance);
+        setTransactions(accountData.transactions);
         
         // Additional data processing if needed from userDetailsResponse
 
@@ -69,7 +71,7 @@ const Wallet = () => {
           <button id="money-add">Pay Now</button>
         </div>
         <div className="total-trans">
-          <p id="trans">Total Transaction:<br />20<br /><SiBitcoinsv className="price-icon" /></p>
+          <p id="trans">Total Transaction:<br />{transitions}<br /><SiBitcoinsv className="price-icon" /></p>
           <p id="send">10🔴<br />Send</p>
         </div>
         <div>
