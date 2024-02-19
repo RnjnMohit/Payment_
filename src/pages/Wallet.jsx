@@ -27,7 +27,7 @@ const Wallet = (props) => {
       }
 
       const searchData = await searchResponse.json();
-      if(searchData.searchResults.length===0){
+      if (searchData.searchResults.length === 0) {
         console.log('Account Not Found');
         toast.error('Account Not Found');
       }
@@ -109,13 +109,7 @@ const Wallet = (props) => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <button id='acc-search' onClick={fetchSearchResults}>🔍</button>
-            <ul>
-              {results.map((result) => (
-                <li key={result._id}>
-                  UPI: {result.upi}, Account Number: {result.acNumber}
-                </li>
-              ))}
-            </ul>
+
           </div>
         </div>
         <div className="total-trans">
@@ -126,6 +120,19 @@ const Wallet = (props) => {
           <p id='received'>10🟢<br />Received</p>
         </div>
       </div>
+      {results.length && <div className='box paisa text-stone-100 justify-evenly pt-28 to-blue-900'>
+        {results.map((result) => (
+          <p key={result._id}>
+            UPI: {result.upi},
+            <br></br>
+            <br></br>
+            Account Number: {result.acNumber}
+          </p>
+        ))}
+        <div>
+          <button className='pt-2 bg-blue-900 p-2'>Pay Now</button>
+        </div>
+      </div>}
     </div>
   );
 };
