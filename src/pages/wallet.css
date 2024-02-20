@@ -128,3 +128,8 @@
     height: 2px;
     font-size: 20px;
 }
+
+::backdrop {
+    background-color: black;
+    opacity: 0.75;
+  }

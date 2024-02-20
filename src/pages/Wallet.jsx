@@ -3,6 +3,8 @@ import './wallet.css';
 import { FaWallet } from 'react-icons/fa';
 import { SiBitcoinsv } from 'react-icons/si';
 import toast from "react-hot-toast";
+import Modal from 'rsuite/esm/Overlay/Modal';
+import axios from 'axios';
 
 const Wallet = (props) => {
   const [balance, setBalance] = useState(0);
@@ -12,6 +14,43 @@ const Wallet = (props) => {
   const [transactions, setTransactions] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
+  const [ payNow, setPayNow ] = useState(true);
+
+  const handlePayment = async()=>{
+    const amount = document.getElementById('amount').value;
+    const receiverUpi = document.getElementById('receiverUpi').value;
+    const senderUpi = document.getElementById('senderUpi').value;
+
+    try {
+      const response = await axios.post('/createTransaction',{
+          amount,
+          receiver: { receiver_upi: receiverUpi },
+          sender: { sender_upi: senderUpi }
+      });
+      
+      console.log(response.data);
+      toast.success("Payment Successful")
+    }
+    catch (error) {
+      console.error(error);
+      toast.error("Payment Not Successful")
+    }
+  }
+
+  function handlepaynow(){
+    const box = document.getElementById('paynow');
+    if(payNow){
+      box.showModal();
+    }
+    else{
+      box.close();
+    }
+  }
+
+  function handleClosePayNow(){
+    const box = document.getElementById('paynow');
+    box.close();
+  }
 
   const fetchSearchResults = async () => {
     try {
@@ -89,6 +128,18 @@ const Wallet = (props) => {
   }, [searchTerm]);
 
   return (
+    <>
+    <dialog id="paynow" >
+      <div className='m-10'>
+        <input type="number" placeholder='Amount' id='amount'/>
+        <input type="text" placeholder='Reciever Upi Address' id='receiverUpi'/>
+        <input type="text" placeholder='Sender Upi Address' id='senderUpi' />
+        <div className='flex justify-evenly'>
+        <button className=' bg-blue-800 text-stone-100 rounded-xl px-4 py-2 hover:text-blue-800 hover:bg-blue-100 transition duration-150' onClick={handlePayment}>Pay</button>
+        <button className=' bg-blue-800 text-stone-100 rounded-xl px-4 py-2 hover:text-blue-800 hover:bg-blue-100 transition duration-150' onClick={handleClosePayNow} >Close</button>
+        </div>
+      </div>
+    </dialog>
     <div className="big-box">
       <div className="wallet">
         <h1 className="h1">Wallet</h1>
@@ -130,10 +181,11 @@ const Wallet = (props) => {
           </p>
         ))}
         <div>
-          <button className='pt-2 bg-blue-900 p-2'>Pay Now</button>
+          <button className='pt-2 bg-blue-900 p-2' onClick={handlepaynow}>Pay Now</button>
         </div>
       </div>}
     </div>
+    </>
   );
 };
 
