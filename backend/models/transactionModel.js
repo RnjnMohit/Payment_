@@ -8,26 +8,26 @@ mongoose.connect(db_link)
     })
     .catch(function (err) {
         console.log(err);
-    })
+    });
 
 const transactionSchema = mongoose.Schema({
-    sender:{
-        type:mongoose.Schema.ObjectId,
-        ref:'userModel',
-        required:true
+    sender: {
+        sender_upi: {
+            type: String,
+            required: true
+        }
     },
-    receiver:{
-        type:mongoose.Schema.ObjectId,
-        ref:'userModel',
-        required:true
+    receiver: {
+        receiver_upi: {
+            type: String,
+            required: true
+        }
     },
-    amount:{
-        type:Number,
-        min:[1,'MinLimit']
+    amount: {
+        type: Number,
+        min: [1, 'MinLimit']
     }
 });
-
-
 
 transactionModel = mongoose.model('transactionModel', transactionSchema);
 module.exports = transactionModel;
