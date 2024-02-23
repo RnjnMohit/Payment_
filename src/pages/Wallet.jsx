@@ -3,8 +3,6 @@ import './wallet.css';
 import { FaWallet } from 'react-icons/fa';
 import { SiBitcoinsv } from 'react-icons/si';
 import toast from "react-hot-toast";
-import Modal from 'rsuite/esm/Overlay/Modal';
-import axios from 'axios';
 
 const Wallet = (props) => {
   const [balance, setBalance] = useState(0);
@@ -16,38 +14,46 @@ const Wallet = (props) => {
   const [results, setResults] = useState([]);
   const [ payNow, setPayNow ] = useState(true);
 
-  const handlePayment = async()=>{
+  const handlePayment = async () => {
     const amount = document.getElementById('amount').value;
     const receiverUpi = document.getElementById('receiverUpi').value;
     const senderUpi = document.getElementById('senderUpi').value;
-
     try {
-      const response = await axios.post('/createTransaction',{
+      const response = await fetch('http://localhost:3000/transaction/createTransaction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           amount,
           receiver: { receiver_upi: receiverUpi },
           sender: { sender_upi: senderUpi }
+        })
       });
-      
-      console.log(response.data);
-      toast.success("Payment Successful")
-    }
-    catch (error) {
+
+      const data = await response.json();
+      console.log(data);
+      if (response.status==200) {
+        toast.success("Payment Successful");
+      } else {
+        toast.error(data.error || "Payment Not Successful");
+      }
+    } catch (error) {
       console.error(error);
-      toast.error("Payment Not Successful")
+      toast.error("Payment Not Successful");
     }
   }
 
-  function handlepaynow(){
+  function handlepaynow() {
     const box = document.getElementById('paynow');
     if(payNow){
       box.showModal();
-    }
-    else{
+    } else {
       box.close();
     }
   }
 
-  function handleClosePayNow(){
+  function handleClosePayNow() {
     const box = document.getElementById('paynow');
     box.close();
   }
@@ -116,6 +122,7 @@ const Wallet = (props) => {
         setUpi(accountData.upi);
         setBalance(accountData.balance);
         setTransactions(accountData.transactions);
+        
 
         // Additional data processing if needed from userDetailsResponse
 
@@ -152,7 +159,7 @@ const Wallet = (props) => {
           <p id='upi'>UPI: {upi}</p>
           <p id="name">{firstName} {lastName}</p>
           <div>
-            <button id="money-add">Pay Now</button>
+            <button id="money-add" onClick={handlePayment}>Pay Now</button>
             <input id='search'
               type='text'
               placeholder='UPI or Account Number'
