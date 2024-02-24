@@ -39,7 +39,13 @@ function App() {
                 <Route path="/profile" element={<Navigate to='/login' replace />} />
               )
             }
-            <Route path='/wallet' element={<Wallet />} />
+            {
+              isLoggedIn ? (
+                <Route path='/wallet' element={<Wallet setIsLoggedIn={setIsLoggedIn} />} />
+              ) : (
+                <Route path='/wallet' element={<Navigate to='/login' replace/>} />
+              )
+            }
           </Routes>
         </CookieState>
       </CookiesProvider>

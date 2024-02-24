@@ -123,7 +123,7 @@ const Wallet = (props) => {
         toast.success("Payment Successful");
 
       } else if(response.status===402){
-        toast.success('Insufficient Balance');
+        toast.error('Insufficient Balance');
       }
       else if(response.status===404 || response.status===400 || response.status===500) {
         toast.error(data.error || "Payment Not Successful");
