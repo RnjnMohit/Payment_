@@ -13,50 +13,9 @@ const Wallet = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [ payNow, setPayNow ] = useState(true);
+  const [accountData, setAccountData] = useState('');
+  const [fupi, setFupi] = useState('');
 
-  const handlePayment = async () => {
-    const amount = document.getElementById('amount').value;
-    const receiverUpi = document.getElementById('receiverUpi').value;
-    const senderUpi = document.getElementById('senderUpi').value;
-    try {
-      const response = await fetch('http://localhost:3000/transaction/createTransaction', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount,
-          receiver: { receiver_upi: receiverUpi },
-          sender: { sender_upi: senderUpi }
-        })
-      });
-
-      const data = await response.json();
-      console.log(data);
-      if (response.status==200) {
-        toast.success("Payment Successful");
-      } else {
-        toast.error(data.error || "Payment Not Successful");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Payment Not Successful");
-    }
-  }
-
-  function handlepaynow() {
-    const box = document.getElementById('paynow');
-    if(payNow){
-      box.showModal();
-    } else {
-      box.close();
-    }
-  }
-
-  function handleClosePayNow() {
-    const box = document.getElementById('paynow');
-    box.close();
-  }
 
   const fetchSearchResults = async () => {
     try {
@@ -77,8 +36,14 @@ const Wallet = (props) => {
         toast.error('Account Not Found');
       }
       toast.success('Account Found');
-      console.log(searchData);
       setResults(searchData.searchResults);
+      console.log(results);
+      if (results.length > 0) {
+        const firstResult = results[0];
+        const upi = firstResult.upi;
+        console.log(upi);
+      }
+      setFupi(upi);
     } catch (error) {
       console.error('Error fetching search results:', error.message);
     }
@@ -115,6 +80,7 @@ const Wallet = (props) => {
           userDetailsResponse.json(),
         ]);
 
+        setAccountData(accountData);
         console.log(accountData);
         console.log(userData);
         setFirstName(userData.firstName);
@@ -134,13 +100,61 @@ const Wallet = (props) => {
     fetchBalance();
   }, [searchTerm]);
 
+  const handlePayment = async () => {
+    const amount = document.getElementById('amount').value;
+    // const receiverUpi = results.upi;
+    // // const senderUpi = document.getElementById('senderUpi').value;
+    try {
+      const response = await fetch('http://localhost:3000/transaction/createTransaction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount,
+          receiver: { receiver_upi: fupi },
+          sender: { sender_upi: accountData.upi }
+        })
+      });
+
+      const data = await response.json();
+      console.log(data);
+      if (response.status==200) {
+        toast.success("Payment Successful");
+
+      } else if(response.status===402){
+        toast.success('Insufficient Balance');
+      }
+      else if(response.status===404 || response.status===400 || response.status===500) {
+        toast.error(data.error || "Payment Not Successful");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Payment Not Successful");
+    }
+  }
+
+  function handlepaynow() {
+    const box = document.getElementById('paynow');
+    if(payNow){
+      box.showModal();
+    } else {
+      box.close();
+    }
+  }
+
+  function handleClosePayNow() {
+    const box = document.getElementById('paynow');
+    box.close();
+  }
+
   return (
     <>
     <dialog id="paynow" >
       <div className='m-10'>
         <input type="number" placeholder='Amount' id='amount'/>
-        <input type="text" placeholder='Reciever Upi Address' id='receiverUpi'/>
-        <input type="text" placeholder='Sender Upi Address' id='senderUpi' />
+        {/* <input type="text" placeholder='Reciever Upi Address' id='receiverUpi'/> */}
+        {/* <input type="text" placeholder='Sender Upi Address' id='senderUpi' /> */}
         <div className='flex justify-evenly'>
         <button className=' bg-blue-800 text-stone-100 rounded-xl px-4 py-2 hover:text-blue-800 hover:bg-blue-100 transition duration-150' onClick={handlePayment}>Pay</button>
         <button className=' bg-blue-800 text-stone-100 rounded-xl px-4 py-2 hover:text-blue-800 hover:bg-blue-100 transition duration-150' onClick={handleClosePayNow} >Close</button>
@@ -148,8 +162,8 @@ const Wallet = (props) => {
       </div>
     </dialog>
     <div className="big-box">
-      <div className="wallet">
-        <h1 className="h1">Wallet</h1>
+      <div id='dibba' className="wallet">
+        <h1 className="h1">WALLET</h1>
         <FaWallet className="wallet-icon" />
       </div>
       <div className="box">

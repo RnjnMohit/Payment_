@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+#root{
+    background-image: url('./assets/as.jpg');
+    background-color: #6ec7d1;
+    background-blend-mode: luminosity;
+}
+

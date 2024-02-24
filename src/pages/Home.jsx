@@ -5,11 +5,11 @@ import Navbar from "../components/Navbar_setup/Navbar";
 
 function Home() {
     return (
-        <>
+        <div class='op'>
             {/* <Navbar/> */}
             <Info/>
             <Footer />
-        </>
+        </div>
     )
 }
 export default Home;
